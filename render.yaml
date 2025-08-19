@@ -4,11 +4,27 @@ services:
     env: docker
     plan: starter
     envVars:
-      - key: DATABASE_HOST
-        value: dpg-d2hmde7s7bs738bofeg-a
-      - key: DATABASE_PORT
-        value: 5432
-      - key: DATABASE_USER
-        value: admin
-      - key: DATABASE_PASSWORD
-        value: your_real_password
+      - key: HOST
+        fromDatabase:
+          name: my-postgres
+          property: host
+      - key: PORT
+        fromDatabase:
+          name: my-postgres
+          property: port
+      - key: USER
+        fromDatabase:
+          name: my-postgres
+          property: user
+      - key: PASSWORD
+        fromDatabase:
+          name: my-postgres
+          property: password
+      - key: DATABASE
+        fromDatabase:
+          name: my-postgres
+          property: database
+
+databases:
+  - name: my-postgres
+    plan: starter
